@@ -1,0 +1,41 @@
+.log-in, .sign-in {
+    position: absolute;
+    top: 26%;
+    right: 6%;
+    width: 334px;
+    height: 326px;
+    background-color: white;
+}
+
+.log-in, .sign-in {
+    text-align: center;
+    border-radius: 12px;
+    h1 {
+        font-size: 40px;
+        margin-top: 40px;
+    }
+}
+
+.log-in {
+    box-shadow: 0 0 8px rgba(0,0,0,.6);
+}
+
+.log-in-form, .sign-in-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 158px;
+    align-items: center;
+    margin-bottom: 12px;
+    input {
+        width: 80%;
+        padding: 6px;
+    }
+}
+
+.log-in-title {
+    h1 {
+        font-size: 114px;
+    }
+    margin-right: 25%;
+}

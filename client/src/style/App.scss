@@ -1,0 +1,16 @@
+.app {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-image: linear-gradient(rgba(255,255,255,0.3),rgba(255,255,255,0.3)), url(./img/home.jpg);
+  background-size: cover;
+  h1 {
+    font-size: 68px;
+  }
+  .link {
+    display: flex;
+    justify-content: space-around;
+  }
+}
