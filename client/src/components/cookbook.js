@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 // import { UserContext } from '../logInContext';
 import { auth } from './firebase';
 import { useHistory } from 'react-router-dom';
+import AddRecipe from './addRecipe';
 
 export default function Cookbook() {
     // const user = useContext(UserContext);
@@ -29,8 +30,9 @@ export default function Cookbook() {
                 </div>
             </div>
             <div>
-                <button className="btn btn-danger sign-out-btn" onClick={handleClick}>Sign out</button>
+                <AddRecipe />
             </div>
+            <button className="btn btn-danger sign-out-btn" onClick={handleClick}>Sign out</button>
         </div>
     );
 }
