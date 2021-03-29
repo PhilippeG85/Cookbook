@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react';
-// import { UserContext } from '../logInContext';
+import React, { useEffect, useContext } from 'react';
+import { UserContext } from '../logInContext';
 import { auth } from './firebase';
 import { useHistory } from 'react-router-dom';
-import AddRecipe from './addRecipe';
+import {Link} from 'react-router-dom';
 
-export default function Cookbook() {
-    // const user = useContext(UserContext);
+
+export default function Cookbook(props) {
+    const userName = useContext(UserContext);
     const history = useHistory();
 
     useEffect(() => {
@@ -13,7 +14,7 @@ export default function Cookbook() {
             if (!user) {
                 history.push('/log-in')
             }
-        })
+        });
     })
 
     const handleClick = (e) => {
@@ -21,18 +22,23 @@ export default function Cookbook() {
         auth.signOut()
             .then(res => history.push('/log-in'))
     }
+
+    const name = userName ? userName.email : '';
+
     return (
         <div className="home-cookbook">
             <div className="cookbook-index">
                 <h3>Your<br />Cookbook</h3>
-                <div>
-                    <button className="btn btn-light">New recipe</button>
+                <h6>{name}</h6>
+                <div className='left-index'>
+                    <Link to='/new-recipe' className="">New recipe</Link>
+                    <Link to='/'>All recipes</Link>
+                    <Link to='' className="sign-out-btn" onClick={handleClick}>Sign out</Link>
                 </div>
             </div>
-            <div>
-                <AddRecipe />
+            <div style={{ width: "75%" }}>
+                {props.children}
             </div>
-            <button className="btn btn-danger sign-out-btn" onClick={handleClick}>Sign out</button>
         </div>
     );
 }

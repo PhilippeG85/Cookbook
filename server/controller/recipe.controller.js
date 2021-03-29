@@ -13,10 +13,21 @@ recipeController.get('/', (req, res) => {
     })
 });
 
+// Get recipes for a user
+recipeController.get('/:user', (req, res) => {
+    const {user} = req.params;
+    Recipe.find({user}, (re, result) => {
+        res.status(200).send({
+            data: result
+        })
+    })
+})
+
 // Add new recipe
 recipeController.post('/add-recipe', (req, res) => {
-    const { ingredient, time, level, tag, description, user } = req.body;
+    const { name, ingredient, time, level, tag, description, user } = req.body;
     const recipeData = {
+        name,
         ingredient,
         time,
         level,

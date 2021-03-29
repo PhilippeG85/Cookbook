@@ -3,14 +3,19 @@
     height: 100vh;
 }
 
-.sign-out-btn {
-    position: absolute;
-    top: 12px;
-    right: 12px;
+.cookbook-index {
+    background-color: white;
+    width: 25%;
+    padding: 18px 0 0 18px;
 }
 
-.cookbook-index {
-    background-color: red;
-    width: 200px;
-    padding: 18px 0 0 18px;
+.left-index {
+    display: flex;
+    flex-direction: column;
+    a {
+        color: rgb(36, 36, 36);
+        &:hover {
+            color: rgb(36, 36, 36);
+        }
+    }
 }

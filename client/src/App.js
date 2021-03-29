@@ -1,8 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import Home from './components/home';
+import Home from './components/user_LogIn/home';
 import Cookbook from './components/cookbook';
-import NewRecipe from "./components/newRecipe";
+import AddRecipe from "./components/new/addRecipe";
+import UserRecipes from './components/index/userRecipes';
+import UpdateRecipe from './components/update/updateRecipe';
 
 function App() {
 
@@ -12,11 +14,20 @@ function App() {
         <Route exact path="/log-in">
           <Home />
         </Route>
-        <Route>
-          <NewRecipe path="/new-recipe" />
+        <Route path="/new-recipe">
+          <Cookbook>
+            <AddRecipe />
+          </Cookbook>
+        </Route>
+        <Route path="/update-recipe">
+          <Cookbook>
+            <UpdateRecipe />
+          </Cookbook>
         </Route>
         <Route exact path="/" >
-          <Cookbook />
+          <Cookbook>
+            <UserRecipes />
+          </Cookbook>
         </Route>
       </Switch>
     </Router>

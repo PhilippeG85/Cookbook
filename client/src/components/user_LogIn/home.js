@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import LogIn from './logIn';
 import SignIn from './signIn';
-import { auth } from './firebase';
+import { auth } from '../firebase';
 import { useHistory } from 'react-router-dom';
 
 export default function Home() {

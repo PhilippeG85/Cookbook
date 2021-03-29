@@ -2,6 +2,9 @@
 @import "auth";
 @import "cookbook";
 @import "formNew";
+@import "addRecipe";
+@import "userRecipe";
+@import "recipeCard";
 
 body {
   margin: 0;
@@ -15,4 +18,8 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+#root {
+  background-color: #F9F9F9;
 }

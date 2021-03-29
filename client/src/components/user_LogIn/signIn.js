@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { auth } from './firebase';
+import { auth } from '../firebase';
 
 export default function SignIn(props) {
     const [email, setEmail] = useState('');

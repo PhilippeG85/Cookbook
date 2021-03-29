@@ -1,0 +1,22 @@
+.instructions-and-form {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 0 62px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .2);
+    border-radius: 12px;
+    .flex-form {
+        margin: 24px;
+        background: rgb(110, 166, 250);
+        border-radius: 8px;
+        .style-input input {
+            background: rgb(110, 166, 250);
+        }
+    }
+}
+.add-recipe-content {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: space-evenly;
+}
