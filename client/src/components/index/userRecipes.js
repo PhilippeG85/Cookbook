@@ -27,8 +27,8 @@ export default function UserRecipes() {
 
     return (
         <div>
-            <h1>
-                Hello from userRecipes
+            <h1 className='text-center'>
+                Vos Recettes
             </h1>
             <div className='all-recipes-container'>
                 {allRecipes()}

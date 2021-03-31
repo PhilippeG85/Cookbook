@@ -1,7 +1,11 @@
 import React from "react";
+import UpdateForm from "./updateForm";
 
 export default function UpdateRecipe() {
     return (
-        <h1>Update</h1>
+        <div>
+            <h1>Update</h1>
+            <UpdateForm />
+        </div>
     );
 }

@@ -5,6 +5,7 @@ import Cookbook from './components/cookbook';
 import AddRecipe from "./components/new/addRecipe";
 import UserRecipes from './components/index/userRecipes';
 import UpdateRecipe from './components/update/updateRecipe';
+import ShowRecipe from './components/show/showRecipe';
 
 function App() {
 
@@ -19,9 +20,14 @@ function App() {
             <AddRecipe />
           </Cookbook>
         </Route>
-        <Route path="/update-recipe">
+        <Route path="/update-recipe/:id">
           <Cookbook>
             <UpdateRecipe />
+          </Cookbook>
+        </Route>
+        <Route path="/:name">
+          <Cookbook>
+            <ShowRecipe />
           </Cookbook>
         </Route>
         <Route exact path="/" >

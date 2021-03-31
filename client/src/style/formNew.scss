@@ -67,3 +67,15 @@
 .new-form input:valid + .label::after {
     transform: translateX(0%);
 }
+
+.step-content {
+    display: flex;
+    align-items: flex-end;
+    label {
+        padding-bottom: 4px;
+    }
+    .style-input {
+        flex-grow: 1;
+        margin-left: 12px;
+    }
+}

@@ -1,36 +1,36 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { UserContext } from '../../logInContext';
 
-export default function NewRecipe() {
+export default function UpdateForm() {
     const user = useContext(UserContext);
     const [name, setName] = useState('');
     const [ingredient, setIngredient] = useState('');
     const [time, setTime] = useState('');
     const [level, setLevel] = useState('');
     const [tag, setTag] = useState('');
-    const [step, setStep] = useState({step_1: ''});
+    const [description, setDescription] = useState({});
     const [num, setNum] = useState([1]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        const path = window.location.pathname;
         const ingredientArray = ingredient.split(' ');
-        const newRecipe = {
+        const updateRecipe = {
             name,
             ingredient: ingredientArray,
             time,
             level,
             tag,
-            description: step,
+            description,
             user: user.email
         }
-        axios.post('/recipe/add-recipe', newRecipe)
+        axios.put(`/recipe${path}`, updateRecipe)
             .then(res => console.log(res))
             .catch(err => console.log(err))
-        window.location.reload();
     }
 
-    const handleChange = (e, nam) => {
+    const handleChange = (e) => {
         if (e.target.name === 'ingredient') {
             setIngredient(e.target.value)
         } else if (e.target.name === 'time') {
@@ -39,21 +39,57 @@ export default function NewRecipe() {
             setLevel(e.target.value)
         } else if (e.target.name === 'tag') {
             setTag(e.target.value)
+        } else if (e.target.name === 'description') {
+            setDescription(e.target.value)
         } else if (e.target.name === 'name') {
             setName(e.target.value)
         }
     }
 
+    const initState = (data) => {
+        if (data.name) {
+            setName(data.name);
+        }
+        if (data.ingredient) {
+            const ingredientString = data.ingredient.join(' ');
+            setIngredient(ingredientString);
+        }
+        if (data.time) {
+            setTime(data.time);
+        }
+        if (data.level) {
+            setLevel(data.level);
+        }
+        if (data.tag) {
+            setTag(data.tag);
+        }
+        if (data.description) {
+            setDescription(data.description);
+        }
+        const keys = Object.keys(data.description);
+        const keysToNum = keys.map((key, i) => {
+            return i + 1;
+        })
+        setNum(keysToNum);
+    }
+
+    useEffect(() => {
+        const path = window.location.pathname;
+        axios.get(`/recipe${path}`)
+            .then(res => initState(res.data))
+            .catch(err => console.log(err))
+    }, []);
+
     const handleStepChange = (e) => {
-        setStep(prevStep => ({ ...prevStep, [e.target.name]: e.target.value }))
+        setDescription(prevStep => ({ ...prevStep, [e.target.name]: e.target.value }))
     }
 
     const displaySteps = (n, index) => {
         return (
             <div className='step-content' key={index}>
-                <label>Step {n}: </label>
+                <label>Step {index + 1}: </label>
                 <div className='style-input'>
-                    <input type='text' name={`step_${n}`} value={step[`step_${n}`]} onChange={handleStepChange} autoComplete='off' required />
+                    <input type='text' name={`step_${n}`} value={description[`step_${n}`]} onChange={handleStepChange} autoComplete='off' />
                     <label className='label'>
                     </label>
                 </div>
@@ -63,7 +99,7 @@ export default function NewRecipe() {
     const handleClick = () => {
         setNum(prevNum => [...prevNum, ((prevNum.length) + 1)])
     }
-    
+
     return (
         <form onSubmit={handleSubmit} className='new-form'>
             <div className='style-input'>
@@ -108,7 +144,7 @@ export default function NewRecipe() {
                 }
             </div>
             <button onClick={handleClick}>add element</button>
-            <input type='submit' value='Add this recipe' required />
+            <input type='submit' value='Update recipe' required />
         </form>
     )
 }
