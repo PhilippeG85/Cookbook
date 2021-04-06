@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { UserContext } from '../../logInContext';
 
@@ -9,13 +10,19 @@ export default function UpdateForm() {
     const [time, setTime] = useState('');
     const [level, setLevel] = useState('');
     const [tag, setTag] = useState('');
-    const [description, setDescription] = useState({});
+    const [description, setDescription] = useState({step_1: '', step_2: '', step_3: '', step_4: '', step_5: '', step_6: '', step_7: '', step_8: '', step_9: ''});
     const [num, setNum] = useState([1]);
+    const history = useHistory();
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const path = window.location.pathname;
         const ingredientArray = ingredient.split(' ');
+        for (let key in description) {
+            if (description[key] === '') {
+                delete description[key];
+            }
+        }
         const updateRecipe = {
             name,
             ingredient: ingredientArray,
@@ -26,7 +33,7 @@ export default function UpdateForm() {
             user: user.email
         }
         axios.put(`/recipe${path}`, updateRecipe)
-            .then(res => console.log(res))
+            .then(res => history.goBack())
             .catch(err => console.log(err))
     }
 
@@ -101,50 +108,53 @@ export default function UpdateForm() {
     }
 
     return (
-        <form onSubmit={handleSubmit} className='new-form'>
-            <div className='style-input'>
-                <input type="text" name='name' value={name} onChange={handleChange} autoComplete='off' required />
-                <label className="label">
-                    <span className='span-content'>Name</span>
-                </label>
-            </div>
-            <div className='style-input'>
-                <input type="text" name='ingredient' value={ingredient} onChange={handleChange} autoComplete='off' required />
-                <label className="label">
-                    <span className='span-content'>Ingredient</span>
-                </label>
-            </div>
-            <div className='time-level'>
+        <div>
+
+            <form onSubmit={handleSubmit} className='new-form'>
                 <div className='style-input'>
-                    <input type='text' name='time' value={time} onChange={handleChange} autoComplete='off' required />
-                    <label className='label'>
-                        <span className='span-content'>Time</span>
+                    <input type="text" name='name' value={name} onChange={handleChange} autoComplete='off' required />
+                    <label className="label">
+                        <span className='span-content'>Name</span>
                     </label>
                 </div>
                 <div className='style-input'>
-                    <input type='text' name='level' value={level} onChange={handleChange} autoComplete='off' required />
-                    <label className='label'>
-                        <span className='span-content'>Level</span>
+                    <input type="text" name='ingredient' value={ingredient} onChange={handleChange} autoComplete='off' required />
+                    <label className="label">
+                        <span className='span-content'>Ingredient</span>
                     </label>
                 </div>
-            </div>
-            <div className='style-input'>
-                <input type='text' name='tag' value={tag} onChange={handleChange} autoComplete='off' required />
-                <label className='label'>
-                    <span className='span-content'>Tag</span>
-                </label>
-            </div>
-            <div id='steps'>
-                {
-                    num.map((n, index) => {
-                        return (
-                            displaySteps(n, index)
-                        );
-                    })
-                }
-            </div>
+                <div className='time-level'>
+                    <div className='style-input'>
+                        <input type='text' name='time' value={time} onChange={handleChange} autoComplete='off' required />
+                        <label className='label'>
+                            <span className='span-content'>Time</span>
+                        </label>
+                    </div>
+                    <div className='style-input'>
+                        <input type='text' name='level' value={level} onChange={handleChange} autoComplete='off' required />
+                        <label className='label'>
+                            <span className='span-content'>Level</span>
+                        </label>
+                    </div>
+                </div>
+                <div className='style-input'>
+                    <input type='text' name='tag' value={tag} onChange={handleChange} autoComplete='off' required />
+                    <label className='label'>
+                        <span className='span-content'>Tag</span>
+                    </label>
+                </div>
+                <div id='steps'>
+                    {
+                        num.map((n, index) => {
+                            return (
+                                displaySteps(n, index)
+                            );
+                        })
+                    }
+                </div>
+                <input type='submit' value='Update recipe' required />
+            </form>
             <button onClick={handleClick}>add element</button>
-            <input type='submit' value='Update recipe' required />
-        </form>
+        </div>
     )
 }

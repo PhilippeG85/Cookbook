@@ -1,0 +1,15 @@
+.update-page {
+    position: relative;
+}
+
+.update-page > button {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    border: none;
+    background: transparent;
+    text-decoration: underline;
+    &:hover {
+        text-decoration: none;
+    }
+}

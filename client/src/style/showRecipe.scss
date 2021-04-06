@@ -1,3 +1,46 @@
 .pointer {
     cursor: pointer;
 }
+
+.ingredient-content {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 18px;
+    position: relative;
+    &::after{
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 46px;
+        right: 46px;
+        height: 2px;
+        background: black;
+    }
+    p {
+        margin: 0;
+    }
+}
+
+.recipe-content {
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .2);
+    background: white;
+}
+
+.recipe-action {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 12px 42%;
+}
+
+.step {
+    display: flex;
+    p {
+        margin-right: 32px;
+    }
+}
+
+.steps-content {
+    margin: 42px 18px 0;
+}

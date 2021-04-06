@@ -1,3 +1,4 @@
+const functions = require("firebase-functions");
 import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
@@ -28,4 +29,6 @@ app.listen(8080, () => {
         .catch((err)=>{  
             console.log('connection failed');  
         }); 
-})
+});
+
+exports.app = functions.https.onRequest(app);

@@ -47,6 +47,26 @@ export default function ShowRecipe() {
         }
     };
 
+    const displayIngredient = () => {
+        return (
+            ingredient.map((ing, i) => {
+                return <li key={i}>{ing}</li>
+            })
+        );
+    }
+
+    const displayDescription = () => {
+        let array = [];
+        Object.keys(description).forEach(key => {
+            array.push(description[key])
+        });
+        return (
+            array.map((ing, i) => {
+                return (<div className='step' key={i}><p>Step {i + 1}: </p><p>{ing}</p></div>)
+            })
+        );
+    }
+
     useEffect(() => {
         const path = window.location.pathname;
         if (user) {
@@ -56,13 +76,38 @@ export default function ShowRecipe() {
         }
     }, [user]);
 
+    const capitalize = (str) => {
+        if(typeof str === 'string') {
+            return str.replace(/^\w/, c => c.toUpperCase());
+        } else {
+            return '';
+        }
+    };
+
     return (
-        <div>
-            <h1>Inside show recipe</h1>
-            <h1>{name}</h1>
-            <div className='recipe-action'>
-                <Link to={`/update-recipe/${id}`}>Update</Link>
-                <FontAwesomeIcon className='pointer' icon={faTrashAlt} onClick={handleClick} />
+        <div className='m-4'>
+            <h1 className='text-center'>{capitalize(name)}</h1>
+            <p style={{ marginLeft: "18px" }}>Tags: {tag}</p>
+            <div className='recipe-content'>
+                <div className='ingredient-content'>
+                    <div className='recipe-information'>
+                        <h3>Ingredient</h3>
+                        <ul>
+                            {ingredient && displayIngredient()}
+                        </ul>
+                    </div>
+                    <div>
+                        <p>Time: {time}</p>
+                        <p>Level: {level}</p>
+                    </div>
+                </div>
+                <div className='steps-content'>{displayDescription()}</div>
+            </div>
+            <div className='text-center'>
+                <div className='recipe-action'>
+                    <Link to={`/update-recipe/${id}`}>Update</Link>
+                    <FontAwesomeIcon className='pointer' icon={faTrashAlt} onClick={handleClick} />
+                </div>
             </div>
         </div>
     );

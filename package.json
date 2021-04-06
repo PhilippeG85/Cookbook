@@ -1,0 +1,14 @@
+{
+  "name": "cookbook",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:PhilippeG85/Cookbook.git",
+  "author": "Philippe Gonse <pgonse@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "^6.0.0"
+  },
+  "scripts": {
+    "start": "concurrently \"cd server && yarn dev\" \"cd client && yarn start\""
+  }
+}
